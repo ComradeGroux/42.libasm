@@ -6,17 +6,17 @@ section .text
 	global _ft_strcmp
 
 	_ft_strcmp:
-		mov rcx, 0
+		mov		rcx, 0
 
 	loop:
-		mov r8b, [rdi + rcx]
-		mov r9b, [rsi + rcx]
-		cmp r8b, r9b
-		jne end
-		inc rcx
-		jmp loop
+		mov		r8b, [rdi + rcx]
+		mov		r9b, [rsi + rcx]
+		cmp		r8b, r9b
+		jne		end
+		inc		rcx
+		jmp		loop
 
 	end:
-		sub r8b, r9b
-		mov rax, r8b
+		sub		r8b, r9b
+		mov		rax, r8b
 		ret

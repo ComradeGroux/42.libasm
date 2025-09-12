@@ -9,7 +9,8 @@ section .text
 	_ft_write:
 		mov		rax, 1	; we put sys_write in RAX
 		syscall			; we do not need to touch RSI, RDI, ect... because we received the right parameter in the right register
-		jc		error
+		cmp		rax, 0
+		jl		error
 		ret
 
 	error:
