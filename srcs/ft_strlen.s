@@ -9,7 +9,7 @@ section .text
 		mov		rcx, 0	; init counter
 
 	loop:
-		cmp		[rdi + rcx], 0 	; RDI point to beginning of the string, so we add the RCX to check the right character
+		cmp		BYTE[rdi + rcx], 0 	; RDI point to beginning of the string, so we add the RCX to check the right character
 		je		end				; If cmp is equal, jump to end. Otherwise continue
 		inc		rcx
 		jmp		loop

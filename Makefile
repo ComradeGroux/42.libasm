@@ -7,12 +7,16 @@ NAME = libasm
 
 NAME_LIB = libasm.a
 
-SRCS = 	ft_write.s \
+DIR_S = srcs/
+# CREATE_DIR = @mkdir -p objs
+DIR_O = objs/
+
+SRCS_LIST = 	ft_write.s \
 		ft_read.s \
 		ft_strcmp.s \
 		ft_strcpy.s \
 		ft_strdup.s \
-		ft_strlen.s \
+		ft_strlen.s
 
 CC = gcc
 
@@ -20,14 +24,15 @@ CFLAGS = -Wall -Wextra -Werror
 
 NASM = nasm
 
-NASMFLAGS = 
+NASMFLAGS = -f elf64
 
 SRCS =		${addprefix ${DIR_S}, ${SRCS_LIST}}
 
 OBJS =		${SRCS:${DIR_S}%.s=${DIR_O}%.o}
 
-%.o : %.s
-	$(NASM) $(NASMFLAGS) -f elf64 $< -o $@
+${DIR_O}%.o : ${DIR_S}%.s
+	@mkdir -p ${DIR_O}
+	$(NASM) $(NASMFLAGS) $< -o $@
 
 all : $(NAME)
 

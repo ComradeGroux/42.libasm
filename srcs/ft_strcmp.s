@@ -18,5 +18,5 @@ section .text
 
 	end:
 		sub		r8b, r9b
-		mov		rax, r8b
+		movzx	rax, r8b
 		ret
