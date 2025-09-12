@@ -18,4 +18,3 @@ section .text
 	end:
 		mov rax, rdi
 		ret
-		
