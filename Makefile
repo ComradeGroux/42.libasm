@@ -24,10 +24,10 @@ NASMFLAGS =
 
 SRCS =		${addprefix ${DIR_S}, ${SRCS_LIST}}
 
-OBJS =		${SRCS:${DIR_S}%.c=${DIR_O}%.o}
+OBJS =		${SRCS:${DIR_S}%.s=${DIR_O}%.o}
 
 %.o : %.s
-	$(NASM) $(NASMFLAGS) $< -o $@
+	$(NASM) $(NASMFLAGS) -f elf64 $< -o $@
 
 all : $(NAME)
 
@@ -59,4 +59,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re 
+.PHONY: all clean fclean re
