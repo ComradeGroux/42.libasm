@@ -8,7 +8,6 @@ NAME = libasm
 NAME_LIB = libasm.a
 
 DIR_S = srcs/
-# CREATE_DIR = @mkdir -p objs
 DIR_O = objs/
 
 SRCS_LIST = 	ft_write.s \
@@ -18,9 +17,11 @@ SRCS_LIST = 	ft_write.s \
 		ft_strdup.s \
 		ft_strlen.s
 
+TESTER = test
+
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -no-pie #The -no-pie flag is important otherwise it would not compile
 
 NASM = nasm
 
@@ -41,6 +42,10 @@ $(NAME) : $(OBJS)
 	ar rcs $(NAME_LIB) $(OBJS)
 	@echo "$(RESET)[$(GREENGREEN)${NAME}$(RESET)]: ${NAME} created !"
 
+test : all
+	${CC} ${CFLAGS} main.c -L. -lasm -o ${TESTER}
+
+
 # ${NAME}: ${OBJS}
 # 	nasm ${SRCS} -o ${NAME}.o
 # 	ld ${NAME}.o -lSystem -o ${NAME}
@@ -54,12 +59,13 @@ clean:
 	@echo "$(RED)  ╚═════╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝╚═╝  ╚═══╝ ╚═════╝ $(RESET)"
 	@echo "[$(RED)${NAME}$(RESET)]: Cleaning ${NAME} Objects...${GREY}"
 	${RM} ${OBJS}
-	${RM} ${DIR_O}
+	${RM} -r ${DIR_O}
 	@echo "[$(RED)${NAME}$(RESET)]: ${NAME} Objects were cleaned${GREY}"
 
 fclean: clean
 	@echo "${RESET}[$(RED)${NAME}$(RESET)]: Cleaning ${NAME}...${GREY}"
 	${RM} ${NAME} ${NAME_LIB}
+	${RM} ${TESTER}
 	@echo "${RESET}[$(RED)${NAME}$(RESET)]: ${NAME} Executable was cleaned"
 
 re: fclean all
