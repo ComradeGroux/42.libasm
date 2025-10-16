@@ -3,10 +3,10 @@ bits 64
 section .data
 
 section .text
-	global _ft_read
+	global ft_read
 	extern __errno_location
 
-	_ft_read:
+	ft_read:
 		mov		rax, 0	; we put sys_read in RAX
 		syscall			; we do not need to touch RSI, RDI, ect... because we received the right parameter in the right register
 		cmp		rax, 0

@@ -3,9 +3,9 @@ bits 64
 section .data
 
 section .text
-	global _ft_strcpy
+	global ft_strcpy
 	
-	_ft_strcpy: ; RDI = dst ; RSI = src
+	ft_strcpy: ; RDI = dst ; RSI = src
 		mov		rcx, 0
 
 	loop:

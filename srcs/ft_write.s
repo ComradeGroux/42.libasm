@@ -3,10 +3,10 @@ bits 64
 section .data
 
 section .text
-	global _ft_write
+	global ft_write
 	extern __errno_location
 
-	_ft_write:
+	ft_write:
 		mov		rax, 1	; we put sys_write in RAX
 		syscall			; we do not need to touch RSI, RDI, ect... because we received the right parameter in the right register
 		cmp		rax, 0

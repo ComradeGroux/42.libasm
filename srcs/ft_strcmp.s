@@ -3,9 +3,9 @@ bits 64
 section .data
 
 section .text
-	global _ft_strcmp
+	global ft_strcmp
 
-	_ft_strcmp:
+	ft_strcmp:
 		mov		rcx, 0
 
 	loop:
