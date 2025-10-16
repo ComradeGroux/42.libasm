@@ -14,6 +14,7 @@ section .text
 		ret
 
 	error:
+		neg		rax
 		mov		r8, rax				; save the ERRNO in a temp register
 		call	__errno_location	; return a pointer to ERRNO
 		mov		[rax], r8			; save the temp in the LOCATION of ERRNO

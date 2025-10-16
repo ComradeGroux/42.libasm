@@ -14,8 +14,9 @@ section .text
 		ret
 
 	error:
-		mov		eax, rax				; save the ERRNO in a temp register
+		neg		rax
+		mov		r8, rax				; save the ERRNO in a temp register
 		call	__errno_location	; return a pointer to ERRNO
-		mov		[rax], eax			; save the temp in the LOCATION of ERRNO
+		mov		[rax], r8			; save the temp in the LOCATION of ERRNO
 		mov		rax, -1				; save -1 as the return value
 		ret
