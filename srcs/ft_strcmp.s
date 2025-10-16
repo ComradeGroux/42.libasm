@@ -9,14 +9,19 @@ section .text
 		mov		rcx, 0
 
 	loop:
-		mov		r8b, [rdi + rcx]
-		mov		r9b, [rsi + rcx]
-		cmp		r8b, r9b
+		mov		al, [rdi + rcx]
+		mov		bl, [rsi + rcx]
+		cmp		al, bl
 		jne		end
+
+		test	al, al
+		je		end
+
 		inc		rcx
 		jmp		loop
 
 	end:
-		sub		r8b, r9b
-		movzx	rax, r8b
+		movzx	eax, al
+		movzx	ebx, bl
+		sub		eax, ebx
 		ret

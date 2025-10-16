@@ -1,5 +1,7 @@
 #include "libasm.h"
 
+#include <stdlib.h>
+
 #define RESET "\033[0m"
 #define RED "\033[0;31m"
 #define GREEN "\033[0;32m"
@@ -16,7 +18,7 @@ int main()
 		"test",
 		"",
 		"\n",
-		"oooooooooooooooooooooooooooooooooooooooooh ca c'est long"
+		"ooooooooooooooooooooooooooooooooooooh ca c'est long"
 	};
 	unsigned int numString = sizeof(strings) / sizeof(strings[0]);
 
@@ -28,7 +30,7 @@ int main()
 			int result = ft_strlen(strings[i]);
 
 			printf(expect == result ? GREEN "OK" : RED "KO");
-			printf(RESET "\t Expect: %d\t Result: %d\n", expect, result);
+			printf(RESET "\t Expect: %d\tResult: %d\n", expect, result);
 		}
 	}
 
@@ -44,16 +46,15 @@ int main()
 			"ooooooooooooooooooooooooooooooooooooooh ca c'est long"
 		};
 		unsigned int numCmpString = sizeof(cmpStrings) / sizeof(cmpStrings[0]);
-		(void)numCmpString;
 		
-		// for(unsigned int i = 0; i < numString && i < numCmpString; i++)
-		// {
-		// 	int expect = strcmp(strings[i], cmpStrings[i]);
-		// 	int result = ft_strcmp(strings[i], cmpStrings[i]);
+		for(unsigned int i = 0; i < numString && i < numCmpString; i++)
+		{
+			int expect = strcmp(strings[i], cmpStrings[i]);
+			int result = ft_strcmp(strings[i], cmpStrings[i]);
 
-		// 	printf(expect == result ? GREEN "OK" : RED "KO");
-		// 	printf(RESET "\t Expect: %d\t Result: %d\n", expect, result);
-		// }
+			printf(expect == result ? GREEN "OK" : RED "KO");
+			printf(RESET "\t Expect: %d\tResult: %d\n", expect, result);
+		}
 	}
 
 	printf(BOLD "\nTesting ft_strcpy\n" RESET);
@@ -86,7 +87,17 @@ int main()
 
 	printf(BOLD "\nTesting ft_strdup\n" RESET);
 	{
+		for(unsigned int i = 0; i < numString; i++)
+		{
+			char *refString = strdup(strings[i]);
+			char *testString = strdup(strings[i]);
 
+			printf(strcmp(refString, testString) == 0 ? GREEN "OK" : RED "KO");
+			printf(RESET "\tExpect: %s\tResult: %s\n", refString, testString);
+			
+			free(refString);
+			free(testString);
+		}
 	}
 
 	printf(BOLD "\nTesting ft_write\n" RESET);
