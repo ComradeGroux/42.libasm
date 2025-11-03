@@ -60,6 +60,7 @@ clean:
 	@echo "[$(RED)${NAME}$(RESET)]: Cleaning ${NAME} Objects...${GREY}"
 	${RM} ${OBJS}
 	${RM} -r ${DIR_O}
+	${RM} test_file.txt
 	@echo "[$(RED)${NAME}$(RESET)]: ${NAME} Objects were cleaned${GREY}"
 
 fclean: clean
