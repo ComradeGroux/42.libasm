@@ -1,6 +1,11 @@
 #include "libasm.h"
 
 #include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <errno.h>
 
 #define RESET "\033[0m"
 #define BOLD "\033[1m"
@@ -165,14 +170,17 @@ int main()
 		testReturn = ft_read(fd, buf_ft, BUFFER_SIZE - 1);
 		testErrno = errno;
 
+
 		printf("◽️ Reading from file ◽️\n");
 		printf(refReturn == testReturn && refErrno == testErrno ? "✅" : "❌");
 		printf("\tExpect: %zd, errno: %d\tResult: %zd, errno: %d\n", refReturn, refErrno, testReturn, testErrno);
+
 
 		printf("\n◽️ Comparing buffers ◽️\n");
 		printf(refReturn == testReturn && memcmp(buf_std, buf_ft, refReturn) == 0 ? "✅" : "❌");
 		printf("\tExpect: %s\tResult: %s\n", buf_std, buf_ft);
 		close(fd);
+
 
 		printf("\n◽️ Reading from invalid FD (-1) ◽️\n");
 		refReturn = read(-1, buf_std, 10);
@@ -181,6 +189,7 @@ int main()
 		testErrno = errno;
 		printf(refReturn == testReturn && refErrno == testErrno ? "✅" : "❌");
 		printf("\tExpect: %zd, errno: %d\tResult: %zd, errno: %d\n", refReturn, refErrno, testReturn, testErrno);
+
 
 		printf("\n◽️ Reading from pipe() ◽️\n");
 		int pipefd[2];
@@ -203,9 +212,10 @@ int main()
 		testReturn = ft_read(pipefd[0], buf_ft, BUFFER_SIZE);
 		testErrno = errno;
 		close(pipefd[0]);
-
 		printf(refReturn == testReturn && refErrno == testErrno ? "✅" : "❌");
 		printf("\tExpect: %zd, errno: %d\tResult: %zd, errno: %d\n", refReturn, refErrno, testReturn, testErrno);
+
+
 		printf("\n◽️ Comparing buffers (pipe) ◽️\n");
 		printf(refReturn == testReturn && memcmp(buf_std, buf_ft, refReturn) == 0 ? "✅" : "❌");
 		printf("\tExpect: %s\tResult: %s\n", buf_std, buf_ft);
