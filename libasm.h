@@ -1,6 +1,6 @@
 #pragma once
 
-#include <sys/types.h> // Pour inclure ssize_t
+#include <sys/types.h>
 
 int			ft_strlen(char *str);
 char		*ft_strcpy(char *dst, char *src);
